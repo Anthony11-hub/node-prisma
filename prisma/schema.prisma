@@ -1,0 +1,31 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    id            String   @id @default(uuid())
+    firstName     String?
+    lastName      String?
+    age           Int
+    email         String   @unique
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+    authoredBlogs Blog[]   @relation("AuthoredBlogs")
+    viewedBlogs   Blog[]   @relation("ViewedBlogs")
+}
+
+model Blog {
+    id        String  @id @default(uuid())
+    title     String  @db.VarChar(255)
+    content   String?
+    published Boolean @default(false)
+    author    User    @relation("AuthoredBlogs", fields: [authorId], references: [id])
+    authorId  String
+    viewer    User    @relation("ViewedBlogs", fields: [viewerId], references: [id])
+    viewerId  String
+}
