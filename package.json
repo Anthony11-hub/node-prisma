@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
-    "migrate": "prisma migrate deploy"
+    "start": "node app.js",
+    "migrate": "prisma migrate dev --name init"
   },
   "keywords": [],
   "author": "",
