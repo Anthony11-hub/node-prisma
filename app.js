@@ -4,6 +4,10 @@ const userRouter = require("./routes/user");
 const blogRouter = require("./routes/blog");
 
 app.use(express.json());
+app.use(express.raw({ type: "application/vnd.custom-type" }));
+app.use(express.text({ type: "text/html" }));
+
+const PORT = process.env.PORT || 3000;
 
 app.get("/", async (req, res) => {
   res.send(
@@ -29,6 +33,6 @@ app.get("/", async (req, res) => {
 app.use("/v1/users", userRouter);
 app.use("/v1/blogs", blogRouter);
 
-app.listen(3000, () => {
-  console.log("app is listenin on port 3000");
+app.listen(PORT, () => {
+  console.log(`app is listenin on port ${PORT}`);
 });
