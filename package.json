@@ -4,7 +4,13 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "dev": "nodemon src/index.js",
+    "build": "npm migrate:deploy",
+    "start": "node app.js",
+    "migrate:dev": "prisma migrate dev",
+    "migrate:deploy": "prisma migrate deploy",
+    "migrate:status": "prisma migrate status",
+    "generate": "prisma generate"
   },
   "keywords": [],
   "author": "",
