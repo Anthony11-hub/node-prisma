@@ -7,7 +7,7 @@
     "build": "npm run migrate:deploy",
     "start": "node app.js",
     "migrate:dev": "prisma migrate dev",
-    "migrate:deploy": "prisma migrate deploy --name init",
+    "migrate:deploy": "npm run migrate:dev && prisma migrate deploy",
     "migrate:status": "prisma migrate status",
     "generate": "prisma generate"
   },
