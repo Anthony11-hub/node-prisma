@@ -28,4 +28,5 @@ model Blog {
     authorId  String
     viewer    User    @relation("ViewedBlogs", fields: [viewerId], references: [id])
     viewerId  String
+    imageUrl  String?
 }

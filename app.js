@@ -26,6 +26,15 @@ app.get("/", async (req, res) => {
     POST /v1/blogs/:id = post single blogs
     POST /v1/blogs/many = post many blogs
   </pre>
+
+  <form action="/v1/blogs" method="POST" enctype="multipart/form-data">
+    <input type="text" name="title"  />
+    <input type="text" name="content"  />
+    <input type="text" name="authorId"  />
+    <input type="text" name="viewerId"  />
+    <input type="file" name="image" id="image" />
+    <input type="submit" value="submit" />
+  </form>
   `.trim()
   );
 });

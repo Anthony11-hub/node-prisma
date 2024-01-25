@@ -3,8 +3,33 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 const addBlog = async (req, res) => {
-  const newBlog = await prisma.blog.create({ data: req.body });
-  res.json(newBlog);
+  try {
+    const { title, content, authorId, viewerId } = req.body;
+
+    // Check if the required fields are present
+    if (!title || !content || !authorId || !viewerId) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    // Get the file details
+    const { filename, path } = req.file;
+
+    // Save the blog details and image information in the database
+    const newBlog = await prisma.blog.create({
+      data: {
+        title,
+        content,
+        authorId,
+        viewerId,
+        imageUrl: path, // You may want to store the full path or URL to the image
+      },
+    });
+
+    res.status(201).json(newBlog);
+  } catch (error) {
+    console.error("Error creating blog:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 };
 
 const addManyBlogs = async (req, res) => {
